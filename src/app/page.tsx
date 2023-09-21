@@ -33,8 +33,37 @@ export default function Home() {
           </div>
         </div>
         {/* Board Page: Content */}
-        <div className="flex-1 overflow-x-auto overflow-y-auto">
-          <div className="h-[2000px] p-5 bg-green-100">content</div>
+        <div className="flex-1 flex flex-col p-5 pt-0 overflow-x-auto overflow-y-auto">
+          {/* Board Page: Column Headings */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="bg-gray-100 uppercase p-3 text-xs">Open</div>
+            <div className="bg-gray-100 uppercase p-3 text-xs">Started</div>
+            <div className="bg-gray-100 uppercase p-3 text-xs">Done</div>
+          </div>
+          {/* Board Page: Columns */}
+          <div className="flex-1 grid grid-cols-3 gap-3 pt-3">
+            {/* Board Page: Open Column */}
+            <div className="bg-gray-100 p-2">
+              {/* Task Card */}
+              <div className="bg-gray-200 p-2 mb-3">
+                <p className="text-[12px] mb-2">
+                  VOY-1865 [Welcome Treat] - (Unique Promo Code)
+                </p>
+                <div className="bg-white p-2">
+                  {/* Task Card: Title */}
+                  <p className="text-sm mb-4">QA Functional Test</p>
+                  {/* Task Card: Footer */}
+                  <div className="grid grid-cols-2">
+                    <div>-</div>
+                    <div className="flex flex-row items-center justify-end space-x-2">
+                      <p className="text-sm">VOY-1865</p>
+                      <div className="h-6 w-6 rounded-full bg-blue-500" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
