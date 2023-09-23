@@ -1,5 +1,6 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import OpenIssueColumn from "./open-issue-column";
+import IssueBoard from "./issue-board";
 
 export default function Home() {
   return (
@@ -40,10 +41,9 @@ export default function Home() {
             <div className="bg-gray-100 uppercase p-3 text-xs">Done</div>
           </div>
           {/* Board Page: Columns */}
-          <div className="flex-1 grid grid-cols-3 gap-3 pt-3">
-            {/* Board Page: Open Column */}
+          <IssueBoard>
             <OpenIssueColumn />
-          </div>
+          </IssueBoard>
         </div>
       </section>
     </main>
