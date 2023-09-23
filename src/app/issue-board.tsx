@@ -1,16 +1,22 @@
 "use client";
 
 import { DragDropContext } from "@hello-pangea/dnd";
-import { ReactNode } from "react";
+import OpenIssueColumn from "./open-issue-column";
+import { useState } from "react";
+import { Issue, IssueStatus, data } from "@/data";
 
-type Props = {
-  children: ReactNode;
-};
+const IssueBoard = () => {
+  const [issues, setIssues] = useState<Issue[]>(data.issues);
 
-const IssueBoard = ({ children }: Props) => {
   return (
     <DragDropContext onDragEnd={() => console.log("drag end")}>
-      <div className="flex-1 grid grid-cols-3 gap-3 pt-3">{children}</div>
+      <div className="flex-1 grid grid-cols-3 gap-3 pt-3">
+        <OpenIssueColumn
+          issues={issues.filter(
+            (issue: Issue) => issue.status === IssueStatus.OPEN
+          )}
+        />
+      </div>
     </DragDropContext>
   );
 };
