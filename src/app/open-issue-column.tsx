@@ -10,7 +10,6 @@ type Props = {
 };
 
 const OpenIssueColumn = ({ issues }: Props) => {
-  console.log(issues);
   return (
     <Droppable droppableId="droppable-open">
       {(provided) => (
