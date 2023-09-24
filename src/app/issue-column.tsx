@@ -6,12 +6,13 @@ import IssueCard from "./issue-card";
 import { Issue } from "@/data";
 
 type Props = {
+  columnId: string;
   issues: Issue[];
 };
 
-const OpenIssueColumn = ({ issues }: Props) => {
+const OpenIssueColumn = ({ issues, columnId }: Props) => {
   return (
-    <Droppable droppableId="droppable-open">
+    <Droppable droppableId={columnId}>
       {(provided) => (
         <div
           className="bg-gray-100 p-2"

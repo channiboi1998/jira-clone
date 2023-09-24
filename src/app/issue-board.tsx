@@ -1,34 +1,53 @@
 "use client";
 
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
-import OpenIssueColumn from "./open-issue-column";
+import IssueColumn from "./issue-column";
 import { useState } from "react";
-import { Issue, IssueStatus, data } from "@/data";
+import { Data, Issue, IssueStatus, data } from "@/data";
 
 const IssueBoard = () => {
-  const [issues, setIssues] = useState<Issue[]>(data.issues);
+  const [state, setState] = useState<Data>(data);
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source } = result;
     if (!destination) {
       return;
     }
-    if (source.index === destination.index) {
+    if (
+      source.index === destination.index &&
+      source.droppableId === destination.droppableId
+    ) {
       return;
     }
-
-    const copy = [...issues];
-    copy.splice(source.index, 1);
-    copy.splice(destination.index, 0, issues[source.index]);
-    setIssues(copy);
+    let copy = { ...state.columns };
+    let id = state.columns[source.droppableId].ids[source.index];
+    copy[source.droppableId].ids.splice(source.index, 1);
+    copy[destination.droppableId].ids.splice(destination.index, 0, id);
+    setState({ ...state, columns: copy });
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="flex-1 grid grid-cols-3 gap-3 pt-3">
-        <OpenIssueColumn
-          issues={issues.filter(
-            (issue: Issue) => issue.status === IssueStatus.OPEN
+        <IssueColumn
+          columnId="open"
+          issues={state.columns.open.ids.map(
+            (id: string) =>
+              state.issues.find((issue: Issue) => issue.id === id) as Issue
+          )}
+        />
+        <IssueColumn
+          columnId="started"
+          issues={state.columns.started.ids.map(
+            (id: string) =>
+              state.issues.find((issue: Issue) => issue.id === id) as Issue
+          )}
+        />
+        <IssueColumn
+          columnId="done"
+          issues={state.columns.done.ids.map(
+            (id: string) =>
+              state.issues.find((issue: Issue) => issue.id === id) as Issue
           )}
         />
       </div>
