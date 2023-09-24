@@ -19,8 +19,9 @@ const OpenIssueColumn = ({ issues }: Props) => {
           {...provided.droppableProps}
         >
           {issues.map((issue: Issue, index: number) => (
-            <IssueCard key={index} issue={issue} />
+            <IssueCard key={issue.id} issue={issue} index={index} />
           ))}
+          {provided.placeholder}
         </div>
       )}
     </Droppable>

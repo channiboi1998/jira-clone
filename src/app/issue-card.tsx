@@ -6,11 +6,12 @@ import React from "react";
 
 type Props = {
   issue: Issue;
+  index: number;
 };
 
-const IssueCard = ({ issue }: Props) => {
+const IssueCard = ({ issue, index }: Props) => {
   return (
-    <Draggable draggableId={issue.id} index={issue.position}>
+    <Draggable draggableId={issue.id} index={index}>
       {(provided) => (
         <div
           ref={provided.innerRef}
