@@ -5,7 +5,12 @@ import IssueColumn from "./issue-column";
 import { useState } from "react";
 import { Data, Issue, data } from "@/data";
 
+import { useSelector } from "react-redux";
+import { getIssues } from "../../redux/issues/selectors";
+
 const IssueColumns = () => {
+  const issues = useSelector(getIssues);
+  console.log("issues are:", issues);
   const [state, setState] = useState<Data>(data);
 
   const onDragEnd = (result: DropResult) => {
