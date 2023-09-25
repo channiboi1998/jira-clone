@@ -3,27 +3,39 @@
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import IssueColumn from "./issue-column";
 import { useState } from "react";
-import { Data, Issue, IssueStatus, data } from "@/data";
+import { Data, Issue, data } from "@/data";
 
 const IssueBoard = () => {
   const [state, setState] = useState<Data>(data);
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source } = result;
-    if (!destination) {
-      return;
-    }
+
+    // Check if there's no destination or if it's the same location
     if (
-      source.index === destination.index &&
-      source.droppableId === destination.droppableId
+      !destination ||
+      (source.index === destination.index &&
+        source.droppableId === destination.droppableId)
     ) {
       return;
     }
-    let copy = { ...state.columns };
-    let id = state.columns[source.droppableId].ids[source.index];
-    copy[source.droppableId].ids.splice(source.index, 1);
-    copy[destination.droppableId].ids.splice(destination.index, 0, id);
-    setState({ ...state, columns: copy });
+
+    const { columns } = state;
+    const sourceColumn = columns[source.droppableId];
+    const destinationColumn = columns[destination.droppableId];
+    const id = sourceColumn.ids[source.index];
+
+    // Clone the source and destination columns
+    const updatedColumns = { ...columns };
+
+    // Remove the item from the source column
+    sourceColumn.ids.splice(source.index, 1);
+
+    // Insert the item into the destination column
+    destinationColumn.ids.splice(destination.index, 0, id);
+
+    // Update the state with the modified columns
+    setState({ ...state, columns: updatedColumns });
   };
 
   return (
