@@ -5,13 +5,15 @@ import IssueColumn from "./issue-column";
 import { useState } from "react";
 import { Data, Issue, data } from "@/data";
 
-import { useSelector } from "react-redux";
-import { getIssues } from "../../redux/issues/selectors";
+import { useSelector, useDispatch } from "react-redux";
+import { getColumns, getIssues } from "../../redux/issues/selectors";
+import { setColumns } from "../../redux/issues/slice";
 
 const IssueColumns = () => {
+  const dispatch = useDispatch();
+  const columns = useSelector(getColumns);
   const issues = useSelector(getIssues);
-  console.log("issues are:", issues);
-  const [state, setState] = useState<Data>(data);
+  //const [state, setState] = useState<Data>(data);
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source } = result;
@@ -25,22 +27,9 @@ const IssueColumns = () => {
       return;
     }
 
-    const { columns } = state;
-    const sourceColumn = columns[source.droppableId];
-    const destinationColumn = columns[destination.droppableId];
-    const id = sourceColumn.ids[source.index];
+    dispatch(setColumns(result));
 
-    // Clone the source and destination columns
-    const updatedColumns = { ...columns };
 
-    // Remove the item from the source column
-    sourceColumn.ids.splice(source.index, 1);
-
-    // Insert the item into the destination column
-    destinationColumn.ids.splice(destination.index, 0, id);
-
-    // Update the state with the modified columns
-    setState({ ...state, columns: updatedColumns });
   };
 
   return (
@@ -48,23 +37,23 @@ const IssueColumns = () => {
       <div className="flex-1 grid grid-cols-3 gap-3 pt-3">
         <IssueColumn
           columnId="open"
-          issues={state.columns.open.ids.map(
+          issues={columns.open.ids.map(
             (id: string) =>
-              state.issues.find((issue: Issue) => issue.id === id) as Issue
+              issues.find((issue: Issue) => issue.id === id) as Issue
           )}
         />
         <IssueColumn
           columnId="started"
-          issues={state.columns.started.ids.map(
+          issues={columns.started.ids.map(
             (id: string) =>
-              state.issues.find((issue: Issue) => issue.id === id) as Issue
+              issues.find((issue: Issue) => issue.id === id) as Issue
           )}
         />
         <IssueColumn
           columnId="done"
-          issues={state.columns.done.ids.map(
+          issues={columns.done.ids.map(
             (id: string) =>
-              state.issues.find((issue: Issue) => issue.id === id) as Issue
+              issues.find((issue: Issue) => issue.id === id) as Issue
           )}
         />
       </div>

@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { DropResult } from "@hello-pangea/dnd";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InitialState } from "./models";
 
 const initialState: InitialState = {
@@ -49,7 +50,31 @@ const initialState: InitialState = {
 const issuesSlice = createSlice({
   name: "[issue]",
   initialState,
-  reducers: {},
+  reducers: {
+    setColumns(state, action: PayloadAction<DropResult>) {
+      if (action.payload.destination) {
+        const { columns } = state;
+        const sourceColumn = columns[action.payload.source.droppableId];
+        const destinationColumn =
+          columns[action.payload.destination.droppableId];
+        const id = sourceColumn.ids[action.payload.source.index];
+
+        // Clone the source and destination columns
+        const updatedColumns = { ...columns };
+
+        // Remove the item from the source column
+        sourceColumn.ids.splice(action.payload.source.index, 1);
+
+        // Insert the item into the destination column
+        destinationColumn.ids.splice(action.payload.destination.index, 0, id);
+
+        // Update the state with the modified columns
+        state.columns = updatedColumns;
+      }
+    },
+  },
 });
+
+export const { setColumns } = issuesSlice.actions;
 
 export default issuesSlice.reducer;
