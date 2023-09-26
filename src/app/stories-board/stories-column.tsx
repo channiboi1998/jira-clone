@@ -2,15 +2,15 @@
 
 import { Droppable } from "@hello-pangea/dnd";
 import React from "react";
-import IssueCard from "./issue-card";
-import { Issue } from "@/data";
+import { Story } from "../../../redux/stories/models";
+import StoryCard from "./story-card";
 
 type Props = {
   columnId: string;
-  issues: Issue[];
+  stories: Story[];
 };
 
-const OpenIssueColumn = ({ issues, columnId }: Props) => {
+const StoriesColumn = ({ stories, columnId }: Props) => {
   return (
     <Droppable droppableId={columnId}>
       {(provided) => (
@@ -19,8 +19,8 @@ const OpenIssueColumn = ({ issues, columnId }: Props) => {
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          {issues.map((issue: Issue, index: number) => (
-            <IssueCard key={issue.id} issue={issue} index={index} />
+          {stories.map((story: Story, index: number) => (
+            <StoryCard key={story.id} story={story} index={index} />
           ))}
           {provided.placeholder}
         </div>
@@ -29,4 +29,4 @@ const OpenIssueColumn = ({ issues, columnId }: Props) => {
   );
 };
 
-export default OpenIssueColumn;
+export default StoriesColumn;

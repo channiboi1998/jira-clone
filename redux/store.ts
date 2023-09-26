@@ -4,10 +4,10 @@ import {
   Reducer,
   AnyAction,
 } from "@reduxjs/toolkit";
-import issuesSlice from "./issues/slice";
+import storiesSlice from "./stories/slice";
 
 const rootReducer = combineReducers({
-  issuesSlice,
+  storiesSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

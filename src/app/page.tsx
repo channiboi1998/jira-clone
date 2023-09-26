@@ -1,12 +1,12 @@
-import IssueColumns from "./issue-columns";
-import CreateIssueModal from "./modals/create-issue-modal";
-import SearchIssueForm from "./search-issue-form";
 import StoreProvider from "./store-provider";
+import SearchStoriesForm from "./search-stories-form";
+import StoriesBoard from "./stories-board";
+import CreateStoryModal from "../../components/modals/create-story-modal";
 
 export default function Home() {
   return (
     <>
-      <CreateIssueModal />
+      <CreateStoryModal />
       <StoreProvider>
         <main className="flex flex-row">
           {/* Sidebar */}
@@ -14,7 +14,6 @@ export default function Home() {
             <p>[sidebar]</p>
           </section>
           <section className="h-screen flex-1 flex flex-col justify-between">
-            {/* Page Content */}
             <div className="p-5">
               <h1 className="text-3xl mb-2 text-center md:text-left">
                 Jira Clone
@@ -25,20 +24,10 @@ export default function Home() {
                   project, copying over most information from an issue like the
                   Summary and Description fields and more.
                 </p>
-                {/* Search Form */}
-                <SearchIssueForm />
+                <SearchStoriesForm />
               </div>
             </div>
-            {/* Content */}
-            <div className="flex-1 flex flex-col p-5 pt-0 overflow-x-auto overflow-y-auto">
-              {/* Board Page: Column Headings */}
-              <div className="grid grid-cols-3 gap-3">
-                <div className="bg-gray-100 uppercase p-3 text-xs">Open</div>
-                <div className="bg-gray-100 uppercase p-3 text-xs">Started</div>
-                <div className="bg-gray-100 uppercase p-3 text-xs">Done</div>
-              </div>
-              <IssueColumns />
-            </div>
+            <StoriesBoard />
           </section>
         </main>
       </StoreProvider>

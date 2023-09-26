@@ -1,19 +1,17 @@
 "use client";
 
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
-import IssueColumn from "./issue-column";
-import { useState } from "react";
-import { Data, Issue, data } from "@/data";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getColumns, getIssues } from "../../redux/issues/selectors";
-import { setColumns } from "../../redux/issues/slice";
+import { getColumns, getStories } from "../../../redux/stories/selectors";
+import { setColumns } from "../../../redux/stories/slice";
+import { Story } from "../../../redux/stories/models";
+import StoriesColumn from "./stories-column";
 
-const IssueColumns = () => {
+const StoriesColumns = () => {
   const dispatch = useDispatch();
   const columns = useSelector(getColumns);
-  const issues = useSelector(getIssues);
-  //const [state, setState] = useState<Data>(data);
+  const stories = useSelector(getStories);
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source } = result;
@@ -28,32 +26,30 @@ const IssueColumns = () => {
     }
 
     dispatch(setColumns(result));
-
-
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="flex-1 grid grid-cols-3 gap-3 pt-3">
-        <IssueColumn
+        <StoriesColumn
           columnId="open"
-          issues={columns.open.ids.map(
+          stories={columns.open.ids.map(
             (id: string) =>
-              issues.find((issue: Issue) => issue.id === id) as Issue
+              stories.find((story: Story) => story.id === id) as Story
           )}
         />
-        <IssueColumn
+        <StoriesColumn
           columnId="started"
-          issues={columns.started.ids.map(
+          stories={columns.started.ids.map(
             (id: string) =>
-              issues.find((issue: Issue) => issue.id === id) as Issue
+              stories.find((story: Story) => story.id === id) as Story
           )}
         />
-        <IssueColumn
+        <StoriesColumn
           columnId="done"
-          issues={columns.done.ids.map(
+          stories={columns.done.ids.map(
             (id: string) =>
-              issues.find((issue: Issue) => issue.id === id) as Issue
+              stories.find((story: Story) => story.id === id) as Story
           )}
         />
       </div>
@@ -61,4 +57,4 @@ const IssueColumns = () => {
   );
 };
 
-export default IssueColumns;
+export default StoriesColumns;

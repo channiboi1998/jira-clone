@@ -1,19 +1,17 @@
 import React from "react";
-import IssueColumns from "./issue-columns";
+import StoriesColumns from "./stories-columns";
 
-const IssueBoard = () => {
+const StoriesBoard = () => {
   return (
-    <div>
-      {/* Board Headings */}
+    <div className="flex-1 flex flex-col p-5 pt-0 overflow-x-auto overflow-y-auto">
       <div className="grid grid-cols-3 gap-3">
         <div className="bg-gray-100 uppercase p-3 text-xs">Open</div>
         <div className="bg-gray-100 uppercase p-3 text-xs">Started</div>
         <div className="bg-gray-100 uppercase p-3 text-xs">Done</div>
       </div>
-      {/* Board Content */}
-      <IssueColumns />
+      <StoriesColumns />
     </div>
   );
 };
 
-export default IssueBoard;
+export default StoriesBoard;

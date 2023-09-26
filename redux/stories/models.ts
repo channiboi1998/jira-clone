@@ -1,4 +1,4 @@
-export type Issue = {
+export type Story = {
   id: string;
   title: string;
   shortDesc?: string;
@@ -13,6 +13,6 @@ export type Column = {
 };
 
 export type InitialState = {
-  issues: Issue[];
+  stories: Story[];
   columns: Column;
 };

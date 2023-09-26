@@ -3,7 +3,7 @@
 import { Dialog } from "@headlessui/react";
 import React from "react";
 
-const CreateIssueModal = () => {
+const CreateStoryModal = () => {
   return (
     <Dialog
       className="bg-gray-500/50 fixed top-0 left-0 h-screen w-screen z-50 flex flex-col items-center justify-center"
@@ -22,4 +22,4 @@ const CreateIssueModal = () => {
   );
 };
 
-export default CreateIssueModal;
+export default CreateStoryModal;

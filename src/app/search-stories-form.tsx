@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import React from "react";
 
-const SearchIssueForm = () => {
+const SearchStoriesForm = () => {
   return (
     <form className="flex flex-col w-full md:w-auto items-end flex-1 pt-5 md:pt-0">
       <div className="border w-full md:w-auto flex flex-row items-center p-2 rounded-lg space-x-2">
@@ -15,4 +15,4 @@ const SearchIssueForm = () => {
   );
 };
 
-export default SearchIssueForm;
+export default SearchStoriesForm;

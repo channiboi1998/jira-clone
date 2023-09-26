@@ -17,7 +17,7 @@ const initialState: InitialState = {
       ids: ["003"],
     },
   },
-  issues: [
+  stories: [
     {
       id: "000",
       title: "QA Functional Test",
@@ -47,8 +47,8 @@ const initialState: InitialState = {
   ],
 };
 
-const issuesSlice = createSlice({
-  name: "[issue]",
+const storiesSlice = createSlice({
+  name: "[stories]",
   initialState,
   reducers: {
     setColumns(state, action: PayloadAction<DropResult>) {
@@ -75,6 +75,6 @@ const issuesSlice = createSlice({
   },
 });
 
-export const { setColumns } = issuesSlice.actions;
+export const { setColumns } = storiesSlice.actions;
 
-export default issuesSlice.reducer;
+export default storiesSlice.reducer;
