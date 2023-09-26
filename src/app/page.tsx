@@ -1,10 +1,12 @@
 import IssueColumns from "./issue-columns";
+import CreateIssueModal from "./modals/create-issue-modal";
 import SearchIssueForm from "./search-issue-form";
 import StoreProvider from "./store-provider";
 
 export default function Home() {
   return (
     <>
+      <CreateIssueModal />
       <StoreProvider>
         <main className="flex flex-row">
           {/* Sidebar */}
