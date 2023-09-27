@@ -1,13 +1,13 @@
 import StoreProvider from "./store-provider";
 import SearchStoriesForm from "./search-stories-form";
 import StoriesBoard from "./stories-board";
-import CreateStoryModal from "../../components/modals/create-story-modal";
+import CreateStoryModal from "./modals/create-story-modal";
 
 export default function Home() {
   return (
     <>
-      <CreateStoryModal />
       <StoreProvider>
+        <CreateStoryModal />
         <main className="flex flex-row">
           {/* Sidebar */}
           <section className="h-screen hidden md:block w-48 p-5 bg-gray-300">
